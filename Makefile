@@ -12,3 +12,7 @@ test:
 	@terraform -chdir=terraform init && terraform -chdir=terraform validate
 	@checkov --quiet --compact --directory .
 	@helmfile -e production lint
+
+PHONY: tf-module-doc
+tf-module-doc: # Generate Terraform module documentation locally
+	@terraform-docs markdown table --output-file README.md --output-mode inject ./terraform
