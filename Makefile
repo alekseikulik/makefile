@@ -9,9 +9,11 @@ timestamp=$(shell date +%s)
 
 PHONY: test
 test:
+	@echo "--> Tests started at $(shell date)"
 	@terraform -chdir=terraform init && terraform -chdir=terraform validate
 	@checkov --quiet --compact --directory .
 	@helmfile -e production lint
+	@echo "--> Tests completed at $(shell date)"
 
 PHONY: tf-module-doc
 tf-module-doc: # Generate Terraform module documentation locally
